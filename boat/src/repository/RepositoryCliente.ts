@@ -36,14 +36,15 @@ export class ClienteRepositorio implements ICliente{
         }
     }
 
+    // Retorna cliente e alugueis
     async get(id: number): Promise<Clientes | null> {
         try {
             return await this.repositorio.findOne({
                 where: { id },
-                relations: ["perfis"]
+                relations: ["alugueis"]
             });
         } catch (error) {
-            throw new Error("Erro ao obter filme.");
+            throw new Error("Erro ao obter aluguel.");
         }
     }
 
@@ -51,15 +52,15 @@ export class ClienteRepositorio implements ICliente{
         try {
             return await this.repositorio.findOne({ where: filtro });
         } catch (error) {
-            throw new Error("Erro ao pesquisar filme.");
+            throw new Error("Erro ao pesquisar.");
         }
     }
 
-    async remove(filme: Clientes): Promise<Clientes> {
+    async remove(cliente: Clientes): Promise<Clientes> {
         try {
-            return await this.repositorio.remove(filme);
+            return await this.repositorio.remove(cliente);
         } catch (error) {
-            throw new Error("Erro ao remover filme.");
+            throw new Error("Erro ao remover cliente.");
         }
     }
 
@@ -67,7 +68,7 @@ export class ClienteRepositorio implements ICliente{
         try {
             await this.repositorio.update(id, dados);
         } catch (error) {
-            throw new Error("Erro ao atualizar filme.");
+            throw new Error("Erro ao atualizar cliente.");
         }
     }
 }
