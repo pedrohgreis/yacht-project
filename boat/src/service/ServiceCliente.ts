@@ -9,7 +9,11 @@ export class ServiceClientes{
     }
 
     async ToCreate(c:Clientes): Promise<Clientes>{
-        return await this.clienteRepository.create(c);
+        try{
+            return await this.clienteRepository.create(c);
+        } catch{
+            throw new Error("Falha ao criar");
+        }
     }
 
     async ToList():Promise<Clientes[]>{
@@ -17,7 +21,11 @@ export class ServiceClientes{
     }
 
     async ToUpdate(id:number, cliente:Partial<Clientes>):Promise<void>{
-        await this.clienteRepository.update(id,cliente);
+        try{
+            await this.clienteRepository.update(id,cliente);
+        } catch{
+            throw new Error("Erro ao atualizar");
+        }
     }
 
     async ToRemove(id:number):Promise<boolean>{

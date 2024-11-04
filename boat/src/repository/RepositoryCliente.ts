@@ -18,21 +18,17 @@ export class ClienteRepositorio implements ICliente{
     }
 
     async create(c:Clientes):Promise<Clientes>{
-        try{
-            return await this.repositorio.save(c)
-        } catch (error){
-            throw new Error("Erro ao criar")
-        }
+        return await this.repositorio.save(c)
     }
 
     
     async list(): Promise<Clientes[]> {
         try {
             return await this.repositorio.find({
-                relations: ["perfis"]
+                relations: ["alugueis"]
             });
         } catch (error) {
-            throw new Error("Erro ao listar filmes.");
+            throw new Error("Erro ao listar.");
         }
     }
 
@@ -57,19 +53,13 @@ export class ClienteRepositorio implements ICliente{
     }
 
     async remove(cliente: Clientes): Promise<Clientes> {
-        try {
-            return await this.repositorio.remove(cliente);
-        } catch (error) {
-            throw new Error("Erro ao remover cliente.");
-        }
+    
+        return await this.repositorio.remove(cliente);
+        
     }
 
     async update(id: number, dados: Partial<Clientes>): Promise<void> {
-        try {
-            await this.repositorio.update(id, dados);
-        } catch (error) {
-            throw new Error("Erro ao atualizar cliente.");
-        }
+        await this.repositorio.update(id, dados);
     }
 }
 
