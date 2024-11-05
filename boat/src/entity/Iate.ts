@@ -27,8 +27,8 @@ export class Iate{
     // @OneToMany(() => Alugel, (alugeis) => alugeis.iate)
     // alugeis: Alugel; 
 
-    // @OneToMany(() => Empresa, (empresas) => empresas.iate)
-    // empresa: Empresa;
+     @OneToMany(() => Empresa, (empresas) => empresas.iates)
+     empresa: Empresa;
 
     // @ManyToMany(() => Fuincionario, (funcionarios) => funcionarios.iate)
     // funcionarios: Funcionario[];
@@ -39,6 +39,6 @@ export class Iate{
         this.ano = ano;
         this.comprimento = commprimento;
         this.capacidade = capacidade;
-        this.preço = preço;;
+        this.preço = preço;
     }
 }

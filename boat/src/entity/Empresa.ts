@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
+import { Iate } from "./Iate";
 
 @Entity()
 export class Empresa {
@@ -21,8 +22,8 @@ export class Empresa {
     // @OneToMany(() => Funcionario, (funcionarios) => funcionarios.empresa)
     // funcionarios:Funcionario[];
 
-    // @OneToMany(() => Iate, (iates) => iates.empresa)
-    // iates: Iate[];
+     @OneToMany(() => Iate, (iates) => iates.empresa)
+     iates: Iate[];
 
 
     constructor(cnpj?:string, razao?:string, nome?:string){

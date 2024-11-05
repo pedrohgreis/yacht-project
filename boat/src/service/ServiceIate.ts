@@ -37,11 +37,11 @@ export class IateService{
     }
 
     async create(iate: Iate): Promise<Iate> {
-        const resp = this.validarPreco(iate)
+        const prec = this.validarPreco(iate)
         const capa = this.validarCapacidade(iate)
         const comp = this.validarComprimento(iate)
         try {
-            if(resp && capa && comp){
+            if(prec && capa && comp){
                 return await this.IateRepository.create(iate);
             }
         } catch (error) {
