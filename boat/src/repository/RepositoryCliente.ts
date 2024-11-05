@@ -38,9 +38,9 @@ export class ClienteRepositorio implements ICRUD<Clientes>
         }
     }
 
-    async search(filtro: Partial<Clientes>): Promise<Clientes | null> {
+    async search(filtro: Partial<Clientes>): Promise<Clientes[]> {
         try {
-            return await this.repositorio.findOne({ where: filtro });
+            return await this.repositorio.find({ where: filtro });
         } catch (error) {
             throw new Error("Erro ao pesquisar.");
         }

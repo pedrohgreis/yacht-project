@@ -55,12 +55,13 @@ export class ServiceClientes{
         }
     }
 
-    async ToRemove(id:number):Promise<boolean>{
-        const client = await this.clienteRepository.search({id:id})
-        if(!client){
-            return false;
+    async ToRemove(id: number): Promise<boolean> {
+        const client = await this.clienteRepository.get(id);
+        
+        if (!client) {
+            return false; 
         }
-
+    
         await this.clienteRepository.remove(client);
         return true;
     }

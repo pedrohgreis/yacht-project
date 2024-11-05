@@ -18,4 +18,9 @@ export class Aluguel {
     @Column()
     dataDevolucao:Date
 
+    constructor(cliente?:Clientes, dataAluguel?:Date, dataDevolucao?:Date){
+        if(cliente) this.cliente = cliente;
+        if(dataAluguel) this.dataAluguel = dataAluguel;
+        if(dataDevolucao) this.dataDevolucao = dataDevolucao;
+    }
 }
