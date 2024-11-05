@@ -15,6 +15,15 @@ export class Iate{
     @Column()
     ano: number;
 
+    @Column()
+    comprimento: number;
+
+    @Column()
+    capacidade: number;
+
+    @Column()
+    preço: number;
+
     // @OneToMany(() => Alugel, (alugeis) => alugeis.iate)
     // alugeis: Alugel; 
 
@@ -24,9 +33,12 @@ export class Iate{
     // @ManyToMany(() => Fuincionario, (funcionarios) => funcionarios.iate)
     // funcionarios: Funcionario[];
     
-    constructor(modelo?: string, marca?: string, ano?: number){
+    constructor(modelo?: string, marca?: string, ano?: number, commprimento?: number, capacidade?: number, preço?: number){
         this.marca = marca;
         this.modelo = modelo;
         this.ano = ano;
+        this.comprimento = commprimento;
+        this.capacidade = capacidade;
+        this.preço = preço;;
     }
 }
