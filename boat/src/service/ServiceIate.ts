@@ -1,4 +1,3 @@
-import { log } from "console";
 import { Iate } from "../entity/Iate";
 import { IateRepositorio } from "../repository/RepositoryIate";
 
@@ -37,42 +36,42 @@ export class IateService{
         }
     }
 
-    async criar(iate: Iate): Promise<Iate> {
+    async create(iate: Iate): Promise<Iate> {
         const resp = this.validarPreco(iate)
         const capa = this.validarCapacidade(iate)
         const comp = this.validarComprimento(iate)
         try {
             if(resp && capa && comp){
-                return await this.IateRepository.criar(iate);
+                return await this.IateRepository.create(iate);
             }
         } catch (error) {
             console.log("Erro ao criar!");
         }
     }
 
-    async listar(): Promise<Iate[]> {
+    async list(): Promise<Iate[]> {
         try {
-            return await this.IateRepository.listar();
+            return await this.IateRepository.list();
         } catch (error) {
             console.log("Erro ao listar!");
         }
     }
 
-    async atualizar(id: number, iate: Partial<Iate>): Promise<void> {
+    async update(id: number, iate: Partial<Iate>): Promise<void> {
         try {
-            await this.IateRepository.atualizar(id, iate);
+            await this.IateRepository.update(id, iate);
         } catch (error) {
             console.log("Erro ao atualizar!");
         }
     }
 
-    async remover(id: number): Promise<boolean> {
+    async remove(id: number): Promise<boolean> {
         try {
-            const Iate = await this.IateRepository.pesquisar({ id: id });
+            const Iate = await this.IateRepository.search({ id: id });
         if (!Iate) {
             return false;
         }
-            await this.IateRepository.remover(Iate);
+            await this.IateRepository.remove(Iate);
             return true;
         } catch (error) {
             console.log("Erro ao remover!");
