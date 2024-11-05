@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable } from "typeorm"
 import { Empresa } from "./Empresa";
 import { Aluguel } from "./Aluguel";
 import { Iate } from "./Iate";
@@ -17,9 +17,20 @@ export class Funcionario {
     @Column()
     cpf: number;
 
-    @ManyToMany(() => Funcionario, (funcionario) => funcionario.iates)
-    //@JoinTable() //criar uma tabela intermediária
-    funcionarios: Funcionario[];
+    @ManyToMany(() => Iate, (iate) => iate.funcionarios)
+    //@JoinTable() // Cria a tabela intermediária para relacionar Funcionarios e Iates
+    @JoinTable({
+        name: "funcionario_iate", 
+        joinColumn: {
+            name: "funcionario_id", 
+            referencedColumnName: "id"
+        },
+        inverseJoinColumn: {
+            name: "iate_id", 
+            referencedColumnName: "id"
+        }
+    })
+    iates: Iate[];
 
     constructor(nome?: string, cargo?: string, cpf?: number) {
         this.cargo = cargo;

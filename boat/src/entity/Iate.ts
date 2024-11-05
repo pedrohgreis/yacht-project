@@ -22,7 +22,7 @@ export class Iate {
     @OneToMany(() => Empresa, (empresas) => empresas.iate)
     empresa: Empresa;
 
-    @ManyToMany(() => Funcionario, (funcionarios) => funcionarios.iate)
+    @ManyToMany(() => Funcionario, (funcionarios) => funcionarios.iates)
     funcionarios: Funcionario[];
 
     constructor(modelo?: string, marca?: string, ano?: number) {

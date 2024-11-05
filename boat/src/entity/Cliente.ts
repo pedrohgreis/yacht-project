@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
 import { Aluguel } from "./Aluguel";
 
+
 @Entity()
 export class Clientes {
 
