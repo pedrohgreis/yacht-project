@@ -15,7 +15,7 @@ export class Funcionario {
     cargo: string;
 
     @Column()
-    cpf: number;
+    cpf: string;
 
     @ManyToMany(() => Iate, (iate) => iate.funcionarios)
     //@JoinTable() // Cria a tabela intermediária para relacionar Funcionarios e Iates
@@ -32,7 +32,7 @@ export class Funcionario {
     })
     iates: Iate[];
 
-    constructor(nome?: string, cargo?: string, cpf?: number) {
+    constructor(nome?: string, cargo?: string, cpf?: string) {
         this.cargo = cargo;
         this.nome = nome;
         this.cpf = cpf;
