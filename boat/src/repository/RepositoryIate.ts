@@ -1,7 +1,6 @@
 import { banco } from "../data-source";
-import { DataSource, Repository } from "typeorm";
+import { Repository } from "typeorm";
 import { Iate } from "../entity/Iate"; 
-import { Interface } from "readline";
 import { ICRUD } from "./Interface";
 
 
@@ -17,11 +16,16 @@ export class IateRepositorio implements ICRUD<Iate> {
     }
 
     async list(): Promise<Iate[]> {
-            return await this.repositorio.find();
+            return await this.repositorio.find({
+                relations: ["alugueis"]
+            })
     }
 
     async get(id: number): Promise<Iate | null> {
-            return await this.repositorio.findOneBy({ id: id });
+            return await this.repositorio.findOne({
+                where: {id},
+                relations: ["alugueis"]
+            })
     }
 
     async search(filtro: Partial<Iate>): Promise<Iate | null> {
