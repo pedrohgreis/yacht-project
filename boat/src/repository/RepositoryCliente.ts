@@ -1,16 +1,10 @@
 import { banco } from "../data-source";
 import { DataSource, Repository } from "typeorm";
 import { Clientes } from "../entity/Cliente";
-interface ICliente {
-    create(c: Clientes): Promise<Clientes>;
-    list(): Promise<Clientes[]>;
-    get(id: number): Promise<Clientes | null>;
-    search(filtro: Partial<Clientes>): Promise<Clientes | null>;
-    remove(cliente: Clientes): Promise<Clientes>;
-    update(id: number, dados: Partial<Clientes>): Promise<void>;
-}
+import { ICRUD } from "./Interface";
 
-export class ClienteRepositorio implements ICliente{
+export class ClienteRepositorio implements ICRUD<Clientes>
+{
     private repositorio: Repository<Clientes>
 
     constructor(){
