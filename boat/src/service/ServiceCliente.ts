@@ -1,41 +1,40 @@
 import { Clientes } from "../entity/Cliente";
 import { ClienteRepositorio } from "../repository/RepositoryCliente";
 
-export class ServiceClientes{
-    private clienteRepository: ClienteRepositorio
-    private cliente:Clientes
+export class ServiceClientes {
+    private clienteRepository: ClienteRepositorio;
+    private cliente: Clientes;
 
     constructor(){
         this.clienteRepository = new ClienteRepositorio();
-        
     }
 
-    private ValidarCPF(): boolean{
-        const cpf = this.cliente.cpf
-        if((cpf.length === 6) && (!isNaN(parseFloat(cpf)))){
+    private ValidarCPF(cpf: string): boolean{
+        if((cpf.length === 6) && (!isNaN(parseFloat(cpf)))) {
             return true;
-        } else{
+        } else {
             throw new Error("CPF inválido");
-        } 
-    }
-
-    private ValidarIDADE(idade:number):boolean{
-        if(idade >= 18){
-            console.log("Pode alugar o iate");  
-            return true;
-        } else{
-            throw new Error("Idade não permitidada para aluguel")
         }
     }
 
-    async ToCreate(c:Clientes): Promise<Clientes>{
+    private ValidarIDADE(idade: number): boolean{
+        if (idade >= 18) {
+            console.log("Pode alugar o iate");
+            return true;
+        } else {
+            throw new Error("Idade não permitida para aluguel");
+        }
+    }
 
-        this.ValidarCPF();
+    async ToCreate(c: Clientes): Promise<Clientes> {
+        this.cliente = c;
+        
+        this.ValidarCPF(c.cpf);
         this.ValidarIDADE(c.idade);
 
-        try{
+        try {
             return await this.clienteRepository.create(c);
-        } catch{
+        } catch {
             throw new Error("Falha ao criar");
         }
     }
