@@ -3,7 +3,7 @@ import { DataSource } from "typeorm";
 export const banco = new DataSource({
     type: "mysql",
     host: "localhost",
-    port: 3307,
+    port: 3306,
     username: "root",
     password: "pedro3026",
     database: "boat",
