@@ -10,7 +10,7 @@ export class IateService{
     }
 
     private validarPreco(iate: Iate){
-        const preco = iate.preço
+        const preco = iate.preco
         if(preco > 0){
             return true;
         } else{
@@ -57,17 +57,16 @@ export class IateService{
         }
     }
 
-    async update(id: number, iate: Partial<Iate>): Promise<void> {
-        try {
-            await this.IateRepository.update(id, iate);
-        } catch (error) {
-            console.log("Erro ao atualizar!");
+    async update(iateId: number, dadosAtualizacao: Partial<Iate>): Promise<Iate> {
+        if (dadosAtualizacao.preco !== undefined && dadosAtualizacao.preco < 0) {
+            throw new Error('Dados inválidos: preço não pode ser negativo');
         }
+        return await this.IateRepository.update(iateId, dadosAtualizacao);
     }
 
     async remove(id: number): Promise<boolean> {
         try {
-            const Iate = await this.IateRepository.search({ id: id });
+            const Iate = await this.IateRepository.get(id);
         if (!Iate) {
             return false;
         }

@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne, ManyToMany } from "typeorm"
-import { Empresa } from "./Empresa";
+import { Funcionario } from "./Funcionario";
+import { Aluguel } from "./Aluguel";
 
 @Entity()
 export class Iate{
@@ -22,23 +23,20 @@ export class Iate{
     capacidade: number;
 
     @Column()
-    preço: number;
+    preco: number;
 
-    // @OneToMany(() => Alugel, (alugeis) => alugeis.iate)
-    // alugeis: Alugel; 
+    @OneToMany(() => Aluguel, (alugueis) => alugueis.iate)
+    alugueis: Aluguel; 
 
-     @OneToMany(() => Empresa, (empresas) => empresas.iates)
-     empresa: Empresa;
-
-    // @ManyToMany(() => Fuincionario, (funcionarios) => funcionarios.iate)
-    // funcionarios: Funcionario[];
+    @ManyToMany(() => Funcionario, (funcionarios) => funcionarios.iates)
+    funcionarios: Funcionario[];
     
-    constructor(modelo?: string, marca?: string, ano?: number, commprimento?: number, capacidade?: number, preço?: number){
-        this.marca = marca;
-        this.modelo = modelo;
-        this.ano = ano;
-        this.comprimento = commprimento;
-        this.capacidade = capacidade;
-        this.preço = preço;
+    constructor(modelo?: string, marca?: string, ano?: number, comprimento?: number, capacidade?: number, preco?: number){
+        if(marca) this.marca = marca;
+        if(modelo) this.modelo = modelo;
+        if(ano) this.ano = ano;
+        if(comprimento) this.comprimento = comprimento;
+        if(capacidade) this.capacidade = capacidade;
+        if(preco) this.preco = preco;
     }
 }
