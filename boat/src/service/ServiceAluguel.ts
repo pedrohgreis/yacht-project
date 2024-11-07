@@ -13,10 +13,21 @@ export class ServiceAluguel {
         return dataDevolucao >= dataAluguel;
     }
 
+    // Método para verificar pendência de pagamento
+    private async validaAluguel(a: Aluguel){
+       if(a.cliente.alugueis = []){
+        return true;
+       }
+    }
+
     async Tocreate(a: Aluguel): Promise<Aluguel> {
         // Chama o método de validação antes de criar o aluguel
         if (!this.validaDatas(a.dataAluguel, a.dataDevolucao)) {
             throw new Error("A data de devolução deve ser posterior ou igual à data de aluguel.");
+        }
+
+        if(!this.validaAluguel(a)){
+            throw new Error()
         }
 
         try {
