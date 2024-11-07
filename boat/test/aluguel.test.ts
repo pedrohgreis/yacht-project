@@ -50,16 +50,15 @@ describe("ServiceAluguel", () => {
             aluguel.dataAluguel = new Date("2024-11-01");
             aluguel.dataDevolucao = new Date("2024-11-10");
         
-            aluguelRepositorioMock.update.mockResolvedValue(undefined); // Não retorna nada
-            aluguelRepositorioMock.get.mockResolvedValue(aluguel); // Retorna o aluguel atualizado
-        
+            aluguelRepositorioMock.update.mockResolvedValue(undefined); 
+            aluguelRepositorioMock.get.mockResolvedValue(aluguel); 
             await serviceAluguel.ToUpdate(1, aluguel);
         
-            // Verifica se o método update foi chamado corretamente
+            
             expect(aluguelRepositorioMock.update).toHaveBeenCalledWith(1, aluguel);
         
-            // Agora, verifica se o mock da função get foi chamado com o argumento esperado
-            expect(aluguelRepositorioMock.get).toHaveBeenCalledWith(1); // ou { where: { id: 1 } }, se necessário
+        
+            expect(aluguelRepositorioMock.get).toHaveBeenCalledWith(1); 
         });
 
         it("deve lançar erro quando as datas forem inválidas", async () => {

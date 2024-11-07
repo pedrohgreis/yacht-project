@@ -21,7 +21,7 @@ describe("ServiceFuncionarios", () => {
     });
 
     it("deve criar um novo funcionário", async () => {
-        const novoFuncionario = new Funcionario("João", "Gerente", "12345678901");
+        const novoFuncionario = new Funcionario("João", "Gerente", "123456");
         funcionarioRepositorioMock.create.mockResolvedValue(novoFuncionario);
 
         const funcionarioCriado = await serviceFuncionario.ToCreate(novoFuncionario);

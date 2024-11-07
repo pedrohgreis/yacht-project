@@ -15,7 +15,7 @@ export class ServiceFuncionarios{
         if (!cpf) {
             throw new Error("CPF não fornecido");
         }
-        if (cpf.length === 11 && !isNaN(Number(cpf))) {
+        if (cpf.length === 6 && !isNaN(Number(cpf))) {
             return true;
         } else {
             throw new Error("CPF inválido");

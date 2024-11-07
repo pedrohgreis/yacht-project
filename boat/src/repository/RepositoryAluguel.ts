@@ -1,5 +1,5 @@
 import { banco } from "../data-source";
-import { DataSource, Repository } from "typeorm";
+import { DataSource, Repository, MoreThan } from "typeorm";
 import { Aluguel } from "../entity/Aluguel";
 import { ICRUD } from "./Interface";
 
@@ -43,5 +43,21 @@ export class Alugueis implements ICRUD <Aluguel>{
             throw new Error("Aluguel não encontrado");
         }
         return aluguelAtualizado;
+    }
+
+    async listAlugueisAtivos(): Promise<Aluguel[]> {
+        try {
+            const agora = new Date();
+        
+            const aluguelsAtivos = await this.repositorio.find({
+                where: {
+                    dataDevolucao: MoreThan(agora) 
+                }
+            });
+            return aluguelsAtivos;
+        } catch (error) {
+            console.error('Erro ao listar aluguéis ativos:', error.message);
+            throw error;
+        }
     }
 }
