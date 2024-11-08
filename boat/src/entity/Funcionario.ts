@@ -17,17 +17,7 @@ export class Funcionario {
     cpf: string;
 
     @ManyToMany(() => Iate, (iate) => iate.funcionarios)
-    @JoinTable({
-        name: "funcionario_iate", 
-        joinColumn: {
-            name: "funcionario_id", 
-            referencedColumnName: "id"
-        },
-        inverseJoinColumn: {
-            name: "iate_id", 
-            referencedColumnName: "id"
-        }
-    })
+    @JoinTable()
     iates: Iate[];
 
     constructor(nome?: string, cargo?: string, cpf?: string) {

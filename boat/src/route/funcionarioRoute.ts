@@ -6,7 +6,7 @@ const routerFuncionario = Router();
 
 routerFuncionario.post("/", (req, res) => {funcionarioController.create(req,res)});
 routerFuncionario.get("/", (req, res) => {funcionarioController.list(req,res)}); 
-routerFuncionario.put("/", (req, res) => {funcionarioController.update(req,res)}); 
-routerFuncionario.delete("/", (req, res) => {funcionarioController.remove(req,res)}); 
+routerFuncionario.put("/:id", (req, res) => {funcionarioController.update(req,res)}); 
+routerFuncionario.delete("/:id", (req, res) => {funcionarioController.remove(req,res)}); 
 
 export default routerFuncionario;

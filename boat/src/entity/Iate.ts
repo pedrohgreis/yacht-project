@@ -25,7 +25,10 @@ export class Iate{
     @Column()
     preco: number;
 
-    @OneToMany(() => Aluguel, (alugueis) => alugueis.iate)
+    @OneToMany(() => Aluguel, (alugueis) => alugueis.iate, {
+        cascade: true,
+        onDelete: "CASCADE"
+    })
     alugueis: Aluguel; 
 
     @ManyToMany(() => Funcionario, (funcionarios) => funcionarios.iates)

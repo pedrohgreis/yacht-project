@@ -11,7 +11,7 @@ export class Alugueis implements ICRUD <Aluguel>{
         this.repositorio = banco.getRepository(Aluguel);
     }
 
-    async create(c: Aluguel): Promise<Aluguel> {
+    async criar(c: Aluguel): Promise<Aluguel> {
         return await this.repositorio.save(c)
     }
 
@@ -28,15 +28,15 @@ export class Alugueis implements ICRUD <Aluguel>{
         }
     }
 
-    async search(filtro: Partial<Aluguel>): Promise<Aluguel[]> {
+    async pesquisar(filtro: Partial<Aluguel>): Promise<Aluguel[]> {
         return await this.repositorio.find({where:filtro});
     }
 
-    async remove(cliente: Aluguel): Promise<Aluguel> {
+    async remover(cliente: Aluguel): Promise<Aluguel> {
         return await this.repositorio.remove(cliente)
     }
 
-    async update(id: number, dados: Partial<Aluguel>): Promise<Aluguel> {
+    async atualizar(id: number, dados: Partial<Aluguel>): Promise<Aluguel> {
         await this.repositorio.update(id, dados);
         const aluguelAtualizado = await this.repositorio.findOne({ where: { id } });
         if (!aluguelAtualizado) {
@@ -60,4 +60,23 @@ export class Alugueis implements ICRUD <Aluguel>{
             throw error;
         }
     }
+
+    async encontrarCliente(clienteId: number): Promise<Aluguel | undefined> {
+        return await this.repositorio.findOne({
+            where: {
+                cliente: { id: clienteId },
+                dataDevolucao: null,
+            }
+        });
+    }
+
+    async encontrarIate(iateId: number): Promise<Aluguel | undefined> {
+        return await this.repositorio.findOne({
+            where: {
+                iate: { id: iateId },
+                dataDevolucao: null,
+            }
+        });
+    }
 }
+

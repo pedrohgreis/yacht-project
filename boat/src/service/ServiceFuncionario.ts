@@ -1,17 +1,18 @@
 import { Funcionario } from "../entity/Funcionario";
 import { FuncionarioRepositorio } from "../repository/RepositoryFuncionario";
+import { IateRepositorio } from "../repository/RepositoryIate";
 
 export class ServiceFuncionarios{
     private FuncionarioRepository: FuncionarioRepositorio
     private Funcionario: Funcionario
+    private iateRepoisitorio: IateRepositorio
 
     constructor(){
         this.FuncionarioRepository = new FuncionarioRepositorio();
-        
+        this.iateRepoisitorio = new IateRepositorio()
     }
 
-    private ValidarCPF(funcionario: Funcionario): boolean {
-        const cpf = funcionario.cpf;
+    private ValidarCPF(cpf: string): boolean {
         if (!cpf) {
             throw new Error("CPF não fornecido");
         }
@@ -23,8 +24,7 @@ export class ServiceFuncionarios{
     }
     
 
-    private ValidarNome(funcionario: Funcionario): boolean {
-        const nome = funcionario.nome;
+    private ValidarNome(nome: string): boolean {
         if (nome.length > 3) {
             return true;
         } else {
@@ -41,13 +41,34 @@ export class ServiceFuncionarios{
         return false;
     }
 
-    async ToCreate(funcionario: Funcionario): Promise<Funcionario> {
+    async ToCreate(dadosFuncionario: {
+        nome: string
+        cargo: string
+        cpf: string
+        iatesIds: number[];
+    }): Promise<Funcionario> {
+
+        const { nome, cargo, cpf, iatesIds } = dadosFuncionario
         try {
-            this.ValidarCPF(funcionario);
-            this.ValidarNome(funcionario);
-            this.ValidarCargo(funcionario.cargo);
-            
-            return await this.FuncionarioRepository.create(funcionario);
+            this.ValidarCPF(cpf);
+            this.ValidarNome(nome);
+            this.ValidarCargo(cargo);
+
+            const iates = [];
+        for (const iateId of iatesIds) {
+            const iate = await this.iateRepoisitorio.get(iateId);
+            if (!iate) {
+                throw new Error(`Iate não encontrado`);
+            }
+            iates.push(iate);
+        }
+
+            const funcionario = new Funcionario()
+            funcionario.nome = nome;
+            funcionario.cargo = cargo
+            funcionario.cpf = cpf
+            funcionario.iates = iates
+            return await this.FuncionarioRepository.criar(funcionario);
         } catch (error) {
             console.error("Falha ao criar funcionário:", error.message);
             throw new Error(error.message); 
@@ -67,7 +88,7 @@ export class ServiceFuncionarios{
     async ToUpdate(id: number, dadosAtualizacao: Partial<Funcionario>): Promise<void> {
         try {
             // Aqui você pode incluir validações, se necessário
-            await this.FuncionarioRepository.update(id, dadosAtualizacao);
+            await this.FuncionarioRepository.atualizar(id, dadosAtualizacao);
         } catch (error) {
             console.error("Erro ao atualizar o funcionário:", error.message);
             throw new Error(error.message);
@@ -81,7 +102,7 @@ export class ServiceFuncionarios{
         if (!funcion) {
             return false;
         }
-            await this.FuncionarioRepository.remove(funcion);
+            await this.FuncionarioRepository.remover(funcion);
             return true;
         } catch (error) {
             console.log("Erro ao remover!");

@@ -33,7 +33,7 @@ export class ServiceClientes {
         this.ValidarIDADE(c.idade);
 
         try {
-            return await this.clienteRepository.create(c);
+            return await this.clienteRepository.criar(c);
         } catch {
             throw new Error("Falha ao criar");
         }
@@ -48,7 +48,7 @@ export class ServiceClientes {
             this.ValidarIDADE(cliente.idade);
         }
         try {
-            const resultado = await this.clienteRepository.update(id, cliente);
+            const resultado = await this.clienteRepository.atualizar(id, cliente);
             if (!resultado) {
                 throw new Error("Cliente não encontrado");
             }
@@ -59,13 +59,13 @@ export class ServiceClientes {
     
 
     async ToRemove(id: number): Promise<boolean> {
-        const client = await this.clienteRepository.get(id);
+        const cliente = await this.clienteRepository.get(id);
         
-        if (!client) {
+        if (!cliente) {
             return false; 
         }
     
-        await this.clienteRepository.remove(client);
+        await this.clienteRepository.remover(cliente);
         return true;
     }
 }

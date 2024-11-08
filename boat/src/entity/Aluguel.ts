@@ -7,10 +7,14 @@ export class Aluguel {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => Clientes, (clientes) => clientes.alugueis)
+    @ManyToOne(() => Clientes, (clientes) => clientes.alugueis, {
+        onDelete: "CASCADE"
+    })
     cliente: Clientes;
 
-    @ManyToOne(() => Iate, (iate) => iate.alugueis)
+    @ManyToOne(() => Iate, (iate) => iate.alugueis, {
+        onDelete: "CASCADE"
+    })
     iate: Iate;
 
     @Column()

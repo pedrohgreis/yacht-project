@@ -11,7 +11,7 @@ export class FuncionarioRepositorio implements ICRUD<Funcionario>
         this.repositorio = banco.getRepository(Funcionario)
     }
 
-    async create(c:Funcionario):Promise<Funcionario>{
+    async criar(c:Funcionario):Promise<Funcionario>{
         return await this.repositorio.save(c)
     }
 
@@ -38,7 +38,7 @@ export class FuncionarioRepositorio implements ICRUD<Funcionario>
         }
     }
 
-    async search(filtro: Partial<Funcionario>): Promise<Funcionario[]> {
+    async pesquisar(filtro: Partial<Funcionario>): Promise<Funcionario[]> {
         try {
             return await this.repositorio.find({ where: filtro });
         } catch (error) {
@@ -46,13 +46,13 @@ export class FuncionarioRepositorio implements ICRUD<Funcionario>
         }
     }
 
-    async remove(cliente: Funcionario): Promise<Funcionario> {
+    async remover(cliente: Funcionario): Promise<Funcionario> {
     
         return await this.repositorio.remove(cliente);
         
     }
 
-    async update(id: number, dados: Partial<Funcionario>): Promise<Funcionario | null> {
+    async atualizar(id: number, dados: Partial<Funcionario>): Promise<Funcionario | null> {
         // Atualiza os dados do funcionário no banco de dados
         await this.repositorio.update(id, dados);
     

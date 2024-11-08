@@ -10,13 +10,13 @@ export class IateRepositorio implements ICRUD<Iate> {
         this.repositorio = banco.getRepository(Iate);
     }
 
-    async create(Iate: Iate): Promise<Iate> {
+    async criar(Iate: Iate): Promise<Iate> {
         return await this.repositorio.save(Iate);
     }
 
     async list(): Promise<Iate[]> {
         return await this.repositorio.find({
-            relations: ["alugueis"]
+            relations: ["alugueis", "funcionarios"]
         });
     }
 
@@ -27,15 +27,15 @@ export class IateRepositorio implements ICRUD<Iate> {
         });
     }
 
-    async search(filtro: Partial<Iate>): Promise<Iate[]> {
+    async pesquisar(filtro: Partial<Iate>): Promise<Iate[]> {
         return await this.repositorio.find({ where: filtro });
     }
 
-    async remove(iate: Iate): Promise<Iate> {
+    async remover(iate: Iate): Promise<Iate> {
         return await this.repositorio.remove(iate);
     }
 
-    async update(id: number, dados: Partial<Iate>): Promise<Iate | null> {
+    async atualizar(id: number, dados: Partial<Iate>): Promise<Iate | null> {
         await this.repositorio.update(id, dados);
         return await this.repositorio.findOne({ where: { id } });
     }

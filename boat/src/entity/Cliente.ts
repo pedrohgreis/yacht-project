@@ -17,7 +17,10 @@ export class Clientes {
     @Column()
     idade: number;
 
-    @OneToMany(() => Aluguel, (alugueis) => alugueis.cliente)
+    @OneToMany(() => Aluguel, (alugueis) => alugueis.cliente, {
+        cascade: true,
+        onDelete: "CASCADE"
+    })
     alugueis:Aluguel[];
 
     constructor(nome?:string, cpf?:string, idade?:number){

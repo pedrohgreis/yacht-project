@@ -50,7 +50,7 @@ export class IateService {
             const comp = this.validarComprimento(iate);
 
             if (prec && capa && comp) {
-                return await this.IateRepository.create(iate);
+                return await this.IateRepository.criar(iate);
             }
         } catch (error) {
             console.error("Erro ao criar Iate:", error.message);
@@ -72,7 +72,7 @@ export class IateService {
             if (dadosAtualizacao.preco !== undefined && dadosAtualizacao.preco < 0) {
                 throw new Error('Preço não pode ser negativo');
             }
-            return await this.IateRepository.update(iateId, dadosAtualizacao);
+            return await this.IateRepository.atualizar(iateId, dadosAtualizacao);
         } catch (error) {
             console.error("Erro ao atualizar Iate:", error.message);
             throw error;
@@ -85,7 +85,7 @@ export class IateService {
             if (!Iate) {
                 return false;
             }
-            await this.IateRepository.remove(Iate);
+            await this.IateRepository.remover(Iate);
             return true;
         } catch (error) {
             console.error("Erro ao remover Iate:", error.message);
