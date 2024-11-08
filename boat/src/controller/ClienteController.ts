@@ -5,7 +5,6 @@ import { ServiceClientes } from '../service/ServiceCliente';
 const serviceCliente = new ServiceClientes();
 
 export class ClienteController{
-    // criar um cliente
     async create(req:Request, res:Response){
         try{
             const cliente = req.body;
@@ -19,7 +18,6 @@ export class ClienteController{
         }
     }
 
-    // Listar os clientes
     async list(req:Request, res:Response){
         try{
             const clientes = await serviceCliente.ToList();
@@ -30,7 +28,6 @@ export class ClienteController{
         }
     }
 
-    // Atualizar cliente
     async update(req:Request, res:Response){
         const {id} = req.params;
         const cliente = req.body;
@@ -44,7 +41,6 @@ export class ClienteController{
         }
     }
 
-    // remover um cliente
     async remove(req:Request, res:Response){
         const {id} = req.params;
 

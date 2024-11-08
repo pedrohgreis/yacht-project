@@ -4,7 +4,6 @@ import { ServiceFuncionarios } from '../service/ServiceFuncionario';
 const serviceFuncionario = new ServiceFuncionarios();
 
 export class FuncionarioController{
-    //criar funcionario
     async create(req:Request, res:Response){
         try{
             const funcionario = req.body;
@@ -18,7 +17,6 @@ export class FuncionarioController{
         }
     }
 
-    //listar funcionario
     async list(req:Request, res:Response){
         try{
             const funcionario = await serviceFuncionario.ToList()

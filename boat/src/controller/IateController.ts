@@ -7,7 +7,6 @@ const iateService = new IateService();
 
 export class IateController{
 
-    //criar iate
     async create(req:Request, res:Response){
         try{
             const iate = req.body;
@@ -19,7 +18,6 @@ export class IateController{
         }
     }
 
-    //listar iates
     async list(req:Request, res:Response){
         try{
             const iates = await iateService.list();
@@ -30,7 +28,6 @@ export class IateController{
         }
     }
 
-    //atualizar iates
     async update(req:Request, res:Response){
         const {id} = req.params;
         const iateAtualizar = req.body;
@@ -44,7 +41,6 @@ export class IateController{
         }
     }
 
-    //remover iate
     async remove(req:Request, res:Response){
         const {id} = req.params;
 

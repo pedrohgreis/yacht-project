@@ -4,7 +4,6 @@ import { ClienteController } from "../controller/ClienteController";
 const clienteController = new ClienteController();
 const routerCliente = Router();
 
-// Definindo as rotas para Clientes
 routerCliente.post("/", (req:Request, res:Response) => { clienteController.create(req, res) }); 
 routerCliente.get("/", (req:Request, res:Response) => { clienteController.list(req, res) }); 
 routerCliente.put("/:id", (req:Request, res:Response) => { clienteController.update(req, res) }); 

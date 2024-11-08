@@ -15,7 +15,6 @@ export class IateService {
         this.ClienteRepository = new ClienteRepositorio();
     }
 
-    // Validações para Iate
     private validarPreco(iate: Iate) {
         const preco = iate.preco;
         if (preco > 0) {
@@ -43,7 +42,6 @@ export class IateService {
         }
     }
 
-    // Criar Iate
     async create(iate: Iate): Promise<Iate> {
         try {
             // Validações
@@ -60,7 +58,6 @@ export class IateService {
         }
     }
 
-    // Listar todos os Iates
     async list(): Promise<Iate[]> {
         try {
             return await this.IateRepository.list();
@@ -70,7 +67,6 @@ export class IateService {
         }
     }
 
-    // Atualizar Iate
     async update(iateId: number, dadosAtualizacao: Partial<Iate>): Promise<Iate> {
         try {
             if (dadosAtualizacao.preco !== undefined && dadosAtualizacao.preco < 0) {
@@ -83,7 +79,6 @@ export class IateService {
         }
     }
 
-    // Remover Iate
     async remove(id: number): Promise<boolean> {
         try {
             const Iate = await this.IateRepository.get(id);
