@@ -32,8 +32,8 @@ export class Alugueis implements ICRUD <Aluguel>{
         return await this.repositorio.find({where:filtro});
     }
 
-    async remover(cliente: Aluguel): Promise<Aluguel> {
-        return await this.repositorio.remove(cliente)
+    async remover(aluguel: Aluguel): Promise<Aluguel> {
+        return await this.repositorio.remove(aluguel)
     }
 
     async atualizar(id: number, dados: Partial<Aluguel>): Promise<Aluguel> {
